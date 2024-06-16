@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.infy</groupId>
-	<artifactId>Demo_SpringData_CRUD</artifactId>
+	<artifactId>Demo_SpringData_CRUD_Postgre</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Demo_SpringData_CRUD</name>
+	<name>Demo_SpringData_CRUD_Postgre</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>22</java.version>
@@ -23,8 +23,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

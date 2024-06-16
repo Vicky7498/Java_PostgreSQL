@@ -1,10 +1,12 @@
-package com.infy.customer;
+package com.infy.entity;
 
 import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "customer", schema = "customer_db")
 public class Customer {
 	@Id
 	private Integer customerId;
@@ -46,7 +48,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", emailId=" + emailId + ", name=" + name + ", datOfBirth="
+		return "Customer [customerId=" + customerId + ", emailId=" + emailId + ", name=" + name + ", dataOfBirth="
 				+ dateOfBirth + "]";
 	}
 
@@ -54,7 +56,8 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		return result = prime * result + ((this.getCustomerId() == null) ? 0 : this.getCustomerId().hashCode());
+		result = prime * result + ((this.getCustomerId() == null) ? 0 : this.getCustomerId().hashCode());
+		return result;
 	}
 
 	@Override
@@ -67,12 +70,10 @@ public class Customer {
 			return false;
 		Customer other = (Customer) obj;
 		if (this.getCustomerId() == null) {
-			if (other.getCustomerId() != null) {
+			if (other.getCustomerId() != null)
 				return false;
-			} else if (!this.getCustomerId().equals(other.getCustomerId())) {
-				return false;
-			}
-		}
+		} else if (!this.getCustomerId().equals(other.getCustomerId()))
+			return false;
 		return true;
 	}
 }

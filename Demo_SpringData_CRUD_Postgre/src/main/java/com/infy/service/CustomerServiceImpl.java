@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.infy.customer.Customer;
 import com.infy.dto.CustomerDTO;
+import com.infy.entity.Customer;
 import com.infy.exception.InfyBankException;
 import com.infy.repository.CustomerRepository;
 
@@ -33,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setName(customerDto.getName());
 		customer.setCustomerId(customerDto.getCustomerId());
 		customerRepository.save(customer);
+
 	}
 
 	@Override
@@ -42,9 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = optional.orElseThrow(() -> new InfyBankException("Service.CUSTOMER_NOT_FOUND"));
 		CustomerDTO customerDto = new CustomerDTO();
 		customerDto.setCustomerId(customer.getCustomerId());
+		customerDto.setDateOfBirth(customer.getDateOfBirth());
 		customerDto.setEmailId(customer.getEmailId());
 		customerDto.setName(customer.getName());
-		customerDto.setDateOfBirth(customer.getDateOfBirth());
 		return customerDto;
 	}
 
@@ -61,9 +62,8 @@ public class CustomerServiceImpl implements CustomerService {
 			customerDto.setName(customer.getName());
 			customerDTOs.add(customerDto);
 		});
-		if (customerDTOs.isEmpty()) {
+		if (customerDTOs.isEmpty())
 			throw new InfyBankException("Service.CUSTOMERS_NOT_FOUND");
-		}
 		return customerDTOs;
 	}
 
@@ -74,4 +74,13 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = optional.orElseThrow(() -> new InfyBankException("Service.CUSTOMER_NOT_FOUND"));
 		customer.setEmailId(emailId);
 	}
+
+	@Override
+	public void deleteCustomer(Integer customerId) throws InfyBankException {
+		// TODO Auto-generated method stub
+		Optional<Customer> optional = customerRepository.findById(customerId);
+		optional.orElseThrow(() -> new InfyBankException("Service.CUSTOMER_NOT_FOUND"));
+		customerRepository.deleteById(customerId);
+	}
+
 }
